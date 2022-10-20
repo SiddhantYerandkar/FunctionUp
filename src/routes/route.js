@@ -1,6 +1,49 @@
 const express = require('express');
 const router = express.Router();
 
+let persons = [
+    {
+        name: "PK",
+        age: 10,
+        votingStatus: false
+    },
+    {
+        name: "SK",
+        age: 20,
+        votingStatus: false
+    },
+    {
+        name: "AA",
+        age: 70,
+        votingStatus: false
+    },
+    {
+        name: "SC",
+        age: 5,
+        votingStatus: false
+    },
+    {
+        name: "HO",
+        age: 40,
+        votingStatus: false
+    }
+]
+
+router.post("/query-param-3", function (req, res) {
+    let input = req.query.votingAge
+    let myArr1 = []
+    for (let index = 0; index < persons.length; index++) {
+        const element = persons[index];
+        if (element.age > input) {
+            element.votingStatus = true
+            myArr1.push(element)
+        }
+    }
+    res.send(myArr1)
+})
+
+
+
 router.get('/students/:name', function (req, res) {
     let studentName = req.params.name
     console.log(studentName)
@@ -159,45 +202,6 @@ router.post("/post-query-2", function (req, res) {
     res.send({ data: finalArr, status: true })
 })
 
-let persons = [
-    {
-        name: "PK",
-        age: 10,
-        votingStatus: false
-    },
-    {
-        name: "SK",
-        age: 20,
-        votingStatus: false
-    },
-    {
-        name: "AA",
-        age: 70,
-        votingStatus: false
-    },
-    {
-        name: "SC",
-        age: 5,
-        votingStatus: false
-    },
-    {
-        name: "HO",
-        age: 40,
-        votingStatus: false
-    }
-]
 
-router.post("/query-param-3", function (req, res) {
-    let input = req.query.votingAge
-    let myArr1 = []
-    for (let index = 0; index < persons.length; index++) {
-        const element = persons[index];
-        if (element.age > input) {
-            element.votingStatus = true
-            myArr1.push(element)
-        } 
-    }
-    res.send(myArr1)
-})
 
 module.exports = router;
