@@ -70,4 +70,78 @@ router.post("/test-post-4", function(req, res) {
     res.send(  { msg: arr , status: true }  )
 })
 
+let players = [{
+    "name": "manish",
+    "dob": "1/1/1995",
+    "gender": "male",
+    "city": "jalandhar",
+    "sports": ["swimming"]
+},{
+    "name": "gopal",
+    "dob": "1/1/1995",
+    "gender": "male",
+    "city": "jalandhar",
+    "sports": ["swimming"]
+},{
+    "name": "lokesh",
+    "dob": "1/1/1990",
+    "gender": "male",
+    "city": "mumbai",
+    "sports": ["soccer"],
+}]
+
+
+// PROBLEM -----> PLAYER & BOOKING 
+
+
+router.post('/players', function(req, res){
+    let element = req.body
+    let elementName = req.body.name
+
+    for (let index = 0; index < 2; index++) {
+        const elem = players[index];
+        if (elem.name == elementName) {
+            return res.send({message :"player already exist" })            
+        }else{
+            players.push(element)
+            return res.send({data : players})
+        }  
+    }
+})
+
+// PROBLEM 1 ---->  CONSECUTIVE NUMBERS 1
+router.get('/sol1', function(req, res){
+    let arr = [1,2,3,5,6,7]
+    
+    let n = arr[arr.length - 1]
+    let sum = n*(n+1)/2
+
+    let sum1 = 0
+    for(let i=0;i<arr.length;i++){
+    sum1 = sum1 + arr[i]
+    }
+    let missingNo = sum - sum1
+
+    res.send({data : missingNo})
+})
+
+// PROBLEM 2 ----> CONSECUTVE NUMBERS 2
+
+router.get('/sol2', function(req, res){
+    let arr = [33,34,35,37,38]
+    let n = arr.length + 1
+    let first = arr[0]
+    let last = arr[arr.length - 1]
+
+    let sum = n*(first + last)/2
+    
+    let sum1 = 0
+    for(let i=0;i<arr.length;i++){
+    sum1 = sum1 + arr[i]
+    }
+
+    missingNo = sum - sum1
+    res.send({data : missingNo})
+})
+
 module.exports = router;
