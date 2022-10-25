@@ -10,6 +10,5 @@ const getUsersData= async function (req, res) {
     let allUsers= await UserModel.find()
     res.send({msg: allUsers})
 }
-
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData

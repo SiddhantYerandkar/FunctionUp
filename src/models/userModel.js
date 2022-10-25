@@ -26,6 +26,5 @@ const userSchema = new mongoose.Schema( {
 module.exports = mongoose.model('User', userSchema) //users
 
 
-
 // String, Number
 // Boolean, Object/json, array
