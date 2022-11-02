@@ -1,26 +1,28 @@
+const { request } = require("express")
 
 const mid1= function ( req, res, next) {
-    req.falana= "hi there. i am adding something new to the req object"
-    console.log("Hi I am a middleware named Mid1")
-    next()
-}
+    
+    const ipAddress = req.socket.remoteAddress;
+    console.log(ipAddress);
 
-const mid2= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid2")
-    next()
-}
+    // DATE    
+    let ts = Date.now()
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
 
-const mid3= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid3")
-    next()
-}
-
-const mid4= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid4")
+    console.log(year + "-" + month + "-" + date);
+    // TIME
+    let dt = new Date(ts)
+    let hours = dt.getHours() 
+    let minute = dt.getMinutes()
+    let seconds = dt.getSeconds()   
+    
+    console.log(hours + ":" + minute + ":" + seconds );
+    
+    console.log(req.path);
     next()
 }
 
 module.exports.mid1= mid1
-module.exports.mid2= mid2
-module.exports.mid3= mid3
-module.exports.mid4= mid4
