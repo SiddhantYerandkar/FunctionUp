@@ -10,6 +10,4 @@ const theMidMiddleware = function (req, res, next ){
 }
 
 
-
-
 module.exports.theMidMiddleware = theMidMiddleware
