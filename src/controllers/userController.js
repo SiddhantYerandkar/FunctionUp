@@ -6,9 +6,9 @@ const UserModel= require("../models/userModel")
 const basicCode= async function(req, res, next) {
     console.log( "HEADER DATA ABOVE")
     console.log( "hey man, congrats you have reached the Handler")
-    //res.send({ msg: "This is coming from controller (handler)"})
+    res.send({ msg: "This is coming from controller (handler)"})
     next()
-    }
+}
 
 const createUser= async function (req, res) {
     // Remember that inside request object we already know multiple attributes
