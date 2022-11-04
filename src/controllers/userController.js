@@ -4,14 +4,14 @@ const userModel = require("../models/userModel");
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
 */
-const createUser = async function (abcd, xyz) {
+const createUser = async function (req, res) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
-  let data = abcd.body;
+  let data = req.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
-  xyz.send({ msg: savedData });
+  console.log(req.newAtribute);
+  res.send({ msg: savedData });
 };
 
 const loginUser = async function (req, res) {
@@ -19,11 +19,7 @@ const loginUser = async function (req, res) {
   let password = req.body.password;
 
   let user = await userModel.findOne({ emailId: userName, password: password });
-  if (!user)
-    return res.send({
-      status: false,
-      msg: "username or the password is not corerct",
-    });
+  if (!user) return res.send({status: false, msg: "username or the password is not corerct",});
 
   // Once the login is successful, create the jwt token with sign function
   // Sign function has 2 inputs:
@@ -31,26 +27,19 @@ const loginUser = async function (req, res) {
   // The decision about what data to put in token depends on the business requirement
   // Input 2 is the secret (This is basically a fixed value only set at the server. This value should be hard to guess)
   // The same secret will be used to decode tokens 
-  let token = jwt.sign(
-    {
-      userId: user._id.toString(),
-      batch: "thorium",
-      organisation: "FunctionUp",
-    },
-    "functionup-plutonium-very-very-secret-key"
-  );
+  let token = jwt.sign({ userId: user._id.toString(),batch: "thorium",organisation: "FunctionUp",},"functionup-plutonium-very-very-secret-key");
   res.setHeader("x-auth-token", token);
   res.send({ status: true, token: token });
 };
 
 const getUserData = async function (req, res) {
   let token = req.headers["x-Auth-token"];
-  if (!token) token = req.headers["x-auth-token"];
+  //if (!token) token = req.headers["x-auth-token"];
 
   //If no token is present in the request header return error. This means the user is not logged in.
-  if (!token) return res.send({ status: false, msg: "token must be present" });
+  //if (!token) return res.send({ status: false, msg: "token must be present" });
 
-  console.log(token);
+  //console.log(token);
 
   // If a token is present then decode the token with verify function
   // verify takes two inputs:
