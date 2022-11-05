@@ -14,6 +14,8 @@ router.post("/login", userController.loginUser)
 //The userId is sent by front end
 router.get("/users/:userId", auth.tokenAuth , userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)
+router.put("/users/:userId", auth.tokenAuth, userController.updateUser)
+
+router.delete("/users/:userId", auth.tokenAuth, userController.deleteUser)
 
 module.exports = router;
