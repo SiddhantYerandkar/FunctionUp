@@ -7,7 +7,7 @@ const tokenAuth =  function(req, res, next){
         return res.send({msg:"the request is missing mandatory header"})
     }
     
-    let decodedToken = jwt.verify(token, "functionup-plutonium-very-very-secret-key");
+    let decodedToken = jwt.verify(token, "functionup-lithium-very-very-secret-key");
 
     if (!decodedToken){
     return res.send({ status: false, msg: "token is invalid" });
