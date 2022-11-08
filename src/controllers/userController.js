@@ -8,7 +8,7 @@ const registerUser = async function (req, res) {
       let savedData = await userModel.create(data)
       res.status(201).send({ msg: savedData })
     } else {
-      res.status(400).send({ msg: "invalid" })
+      res.status(400).send({ msg: "invalid field or no field present" })
     }
 
   } catch (error) {
